@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Support Group | In-Home Support in South Australia</title>
+  <meta name="description" content="Professional in-home support across South Australia. Daily living assistance, transport support and community participation." />
+
+  
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --surface:#ffffff;
+      --surface2:#f6f9ff;
+      --text:#0f172a;
+      --muted:#475569;
+      --muted2:#64748b;
+
+      /* Matched to logo (blue, green, warm orange, soft purple) */
+      --brand:#1f6fe5;            /* logo blue */
+      --brand-soft:#eef5ff;       /* soft blue */
+      --accent:#22c55e;           /* logo green */
+      --accent-soft:#ecfdf5;      /* soft green */
+      --warm:#f59e0b;             /* logo orange */
+      --highlight:#7c3aed;        /* logo purple */
+
+      --stroke:rgba(15,23,42,.10);
+      --shadow: 0 10px 24px rgba(15,23,42,.10);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:inherit}
+    .container{max-width:1120px;margin:0 auto;padding:0 20px}
+
+    /* NAV */
+    .nav{
+      position:sticky;top:0;z-index:20;
+      background: rgba(255,255,255,.92);
+      backdrop-filter:saturate(140%) blur(10px);
+      border-bottom:1px solid var(--stroke);
+    }
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:14px;}
+
+    /* LOGO ONLY */
+    .logo-only{display:flex;align-items:center;text-decoration:none;}
+    .logo-only img{height:64px;width:auto;display:block;border-radius:12px;}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:11px 14px;border-radius:14px;text-decoration:none;
+      font-weight:700;border:1px solid var(--stroke);
+      background: #ffffff;
+      color:var(--text);
+      cursor:pointer;
+    }
+    .btn:hover{ background: rgba(2,6,23,.03); }
+    .btn-primary{
+      background: linear-gradient(135deg,var(--brand),var(--highlight));
+      border:0;
+      color:#ffffff;
+      box-shadow: 0 12px 22px rgba(31,111,229,.22);
+    }
+    .btn-primary:hover{ filter:brightness(1.04); }
+    .btn-primary:hover{ filter:brightness(1.03); }
+    .btn-primary:hover{ filter:brightness(1.02); }
+
+    /* HERO */
+    .hero{padding:76px 0 34px}
+    .hero-card{
+      border:0;
+      background:transparent;
+      box-shadow:none;
+      padding:0;
+      max-width:980px;
+      margin:0 auto;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      align-items:start;
+      width:100%;
+    }
+
+    .badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid var(--stroke);
+      background: var(--brand-soft);
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+    }
+    .badge.secondary{background: var(--accent-soft);}
+    .badge.secondary{background: rgba(34,197,94,.08);}
+    .badge svg{width:16px;height:16px}
+
+    h1{margin:14px 0 14px;font-size:clamp(44px,5.6vw,64px);line-height:1.03;letter-spacing:-1.2px;font-weight:900;}
+    .sub{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.7;
+      max-width:78ch;
+    }
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+
+    .trust{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-weight:700;}
+    .trust span{display:inline-flex;align-items:center;gap:8px;background:#ffffff;border:1px solid var(--stroke);padding:10px 14px;border-radius:999px;font-size:14px}
+
+    /* SUMMARY PANEL */
+    .summary{border:1px solid var(--stroke);background: var(--surface2);border-radius: var(--radius);padding:18px;}
+    .summary h3{margin:0 0 8px;font-size:16px}
+    .summary p{margin:0;color:var(--muted)}
+    .summary .kpi{display:grid;grid-template-columns: 1fr 1fr;gap:10px;margin-top:14px;}
+    .chip{
+      border:1px solid var(--stroke);
+      background:#fff;
+      border-radius:14px;
+      padding:10px 12px;
+      color:var(--muted);
+      font-weight:600;
+      font-size:13.5px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .chip svg{width:18px;height:18px;flex:0 0 auto;color:var(--brand)}
+
+    /* SECTIONS */
+    section{padding:34px 0}
+    .section-head{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:flex-start;
+      gap:6px;
+      margin-bottom:14px;
+    }
+    .section-head h2{margin:0;font-size: clamp(22px, 2.6vw, 28px);letter-spacing:-.3px;}
+    .section-head p{margin:0;color:var(--muted);max-width:78ch;}
+
+    .grid{display:grid;grid-template-columns: repeat(12, 1fr);gap:14px;}
+    .card{
+      grid-column: span 4;
+      border:1px solid var(--stroke);
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+      min-height: 170px;
+    }
+    .card h3{margin:10px 0 6px;font-size:16.5px}
+    .card p{margin:0;color:var(--muted);font-size:14.3px}
+    .icon{
+      width:40px;height:40px;border-radius:14px;
+      display:grid;place-items:center;
+      background: linear-gradient(135deg,var(--brand-soft),var(--accent-soft));
+      border:1px solid var(--stroke);
+      color:var(--brand);
+    }
+    .icon svg{width:20px;height:20px}
+    .icon svg{width:20px;height:20px}
+
+    .list-card{grid-column: span 6;border:1px solid var(--stroke);background: var(--surface);border-radius: var(--radius);padding:18px;box-shadow: var(--shadow);font-size:15px;line-height:1.6;}
+    ul.clean{margin:10px 0 0;padding:0 0 0 18px;color:var(--muted)}
+    ul.clean li{margin:8px 0}
+
+    /* PROCESS */
+    .steps{grid-column: span 12; display:grid; grid-template-columns: repeat(12, 1fr); gap:14px;}
+    .step{grid-column: span 4; border:1px solid var(--stroke); background:var(--surface); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow);} 
+    .step .num{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(37,99,235,.10);border:1px solid var(--stroke);font-weight:800;color:var(--brand)}
+    .step h3{margin:10px 0 6px;font-size:16.5px}
+    .step p{margin:0;color:var(--muted);font-size:14.3px}
+
+    /* CONTACT FORM */
+    .contact-bar{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 14px;max-width:100%;align-items:stretch;}
+    .contact-item{
+      flex:1 1 260px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:12px 14px;
+      border:1px solid var(--stroke);
+      border-radius:16px;
+      background:var(--surface2);
+      text-decoration:none;
+    }
+    .contact-item:hover{background:linear-gradient(135deg,var(--brand-soft),var(--accent-soft))}
+    .ci-ico{width:38px;height:38px;border-radius:14px;display:grid;place-items:center;background:#fff;border:1px solid var(--stroke)}
+    .ci-sub{display:block;color:var(--muted2);font-size:13px;font-weight:600;margin-top:2px}
+
+    .form-wrap{border:1px solid var(--stroke);background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;}
+    form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+    label{font-weight:700;font-size:13px;color:var(--muted)}
+    .field{display:flex;flex-direction:column;gap:6px}
+    input, select, textarea{font:inherit;padding:12px 12px;border-radius:14px;border:1px solid var(--stroke);background:#fff;outline:none;}
+    input:focus, select:focus, textarea:focus{border-color: rgba(37,99,235,.45); box-shadow: 0 0 0 4px rgba(37,99,235,.10)}
+    textarea{grid-column:1 / -1; min-height:120px; resize:vertical}
+    .full{grid-column:1 / -1}
+    .form-actions{grid-column:1 / -1; display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:4px}
+    .hint{color:var(--muted2); font-size:13px}
+
+    /* TOAST POPUP */
+    .toast{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:min(420px, calc(100% - 36px));
+      border-radius:16px;
+      padding:14px 14px;
+      border:1px solid var(--stroke);
+      box-shadow: 0 18px 40px rgba(15,23,42,.18);
+      background:#ffffff;
+      display:none;
+      z-index:999;
+    }
+    .toast.show{display:block; animation:pop .18s ease-out}
+    @keyframes pop{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
+    .toast .t-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .toast .t-title{font-weight:800}
+    .toast .t-msg{margin:6px 0 0;color:var(--muted);font-weight:600}
+    .toast .t-close{border:1px solid var(--stroke);background:var(--surface2);border-radius:12px;padding:8px 10px;font-weight:800;cursor:pointer}
+
+    .error{display:none;border:1px solid rgba(239,68,68,.25);background: rgba(239,68,68,.08);color:#7f1d1d;padding:12px 14px;border-radius:14px;margin-top:14px;font-weight:700;}
+
+    /* FOOTER */
+    footer{padding:22px 0 34px;border-top:1px solid var(--stroke);color:var(--muted);font-size:13.5px;background: var(--surface);}
+    .small{font-size:12.8px;color:var(--muted2)}
+    .footer-link{color:var(--brand);text-decoration:none;font-weight:700}
+    .footer-link:hover{text-decoration:underline}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr}
+      .card{grid-column: span 6}
+      .list-card{grid-column: span 12}
+      .step{grid-column: span 12}
+      form{grid-template-columns:1fr}
+    }
+    @media (max-width: 560px){
+      .card{grid-column: span 12}
+      .hero-card{padding:22px}
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <div style="padding:12px 16px;border-bottom:1px solid rgba(15,23,42,.10);background:#fff;color:#0f172a;font-weight:700">
+      This website works best with JavaScript enabled.
+    </div>
+  </noscript>
+  <!-- NAV (logo + contact only) -->
+  <div class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="logo-only" href="#top" aria-label="Home">
+          <img src="logo.png" alt="Daily Support Group Logo" />
+        </a>
+        <a class="btn btn-primary" href="#enquiry">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header id="top" class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="hero-grid">
+          <div>
+            <div class="badge-row">
+              <div class="badge secondary">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4.35-9-7.35A5.25 5.25 0 0 1 12 6a5.25 5.25 0 0 1 9 7.65C18 16.65 12 21 12 21Z" stroke="currentColor" stroke-width="2"/></svg>
+                We love NDIS
+              </div>
+              <div class="badge">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l7 4v6c0 5-3 9-7 10C8 21 5 17 5 12V6l7-4Z" stroke="currentColor" stroke-width="2"/></svg>
+                Trusted in-home support
+              </div>
+              <div class="badge secondary">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M7 12h10M12 7v10" stroke="currentColor" stroke-width="2"/></svg>
+                South Australia
+              </div>
+            </div>
+
+            <h1>Care at home, delivered with dignity and professionalism.</h1>
+            <p class="sub">We provide structured, professional in-home support designed to help individuals live safely, confidently, and independently in their own homes. Our services cover daily living assistance, transport support, and community participation, delivered with consistency, dignity, and respect across South Australia.</p>
+
+            <p class="sub">Our approach is practical and person‑focused. We take time to understand routines, preferences, and goals, and deliver support that fits naturally into everyday life while maintaining high standards of safety, privacy, and professional care.</p>
+
+            <div class="trust" aria-label="trust points">
+              <span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2"/></svg>
+                Experienced, trusted staff
+              </span>
+              <span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" stroke="currentColor" stroke-width="2"/></svg>
+                Safety, privacy & professionalism
+              </span>
+              <span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M7 12a5 5 0 0 1 10 0" stroke="currentColor" stroke-width="2"/></svg>
+                Reliable & consistent support
+              </span>
+              <span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2"/></svg>
+                Clear communication
+              </span>
+              <span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2"/></svg>
+                Person-centred approach
+              </span>
+              <span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="2"/></svg>
+                Flexible scheduling
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <h2>Our services</h2>
+        <p>Support that is consistent, respectful, and tailored to the individual—delivered across South Australia.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <h3>Daily living support</h3>
+          <p>Practical assistance to support independence, comfort, and safety at home—aligned to your routines and goals.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 17h6M8 7h8M7 11h10" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <h3>Domestic assistance</h3>
+          <p>Help with cleaning, laundry, meal preparation, tidying, and maintaining a safe, organised living space.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 16l1-7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2l1 7M7 16a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM5 16h14" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <h3>Transport support</h3>
+          <p>Assistance getting to appointments, shopping, and community activities with calm, supportive guidance.</p>
+        </div>
+
+        <div class="list-card">
+          <h3>Types of support we provide</h3>
+          <ul class="clean">
+            <li>Assistance with morning and evening routines, prompts, and daily tasks</li>
+            <li>Meal preparation and support to maintain healthy routines</li>
+            <li>Light household duties and home safety support</li>
+            <li>Support attending appointments, errands, and personal activities</li>
+            <li>Community participation, social connection, and supported outings</li>
+          </ul>
+        </div>
+
+        <div class="list-card">
+          <h3>How we work</h3>
+          <ul class="clean">
+            <li><strong>Person-centred:</strong> aligned to your preferences, goals, and routines</li>
+            <li><strong>Professional:</strong> respectful boundaries and clear communication</li>
+            <li><strong>Privacy:</strong> confidentiality and appropriate consent</li>
+            <li><strong>Consistency:</strong> dependable scheduling and follow-through</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCED & TRUSTED STAFF -->
+  <section id="trusted-staff">
+    <div class="container">
+      <div class="section-head">
+        <h2>Experienced &amp; trusted staff</h2>
+        <p>Our support is delivered by carefully selected professionals with practical experience in in-home support. We prioritise safety, respect, and consistency to build trust and long-term relationships.</p>
+      </div>
+
+      <div class="grid">
+        <div class="list-card">
+          <h3>What you can expect</h3>
+          <ul class="clean">
+            <li><strong>Respectful, person-centred support</strong> tailored to routines and goals</li>
+            <li><strong>Clear and professional communication</strong> at all times</li>
+            <li><strong>Safety-focused practices</strong> in the home and community</li>
+            <li><strong>Reliable staff</strong> and dependable scheduling</li>
+          </ul>
+        </div>
+
+        <div class="list-card">
+          <h3>How we support you</h3>
+          <p style="margin:0;color:var(--muted)">
+            We work collaboratively with participants, families, and authorised representatives to ensure support is consistent, appropriate, and aligned with individual needs. You can reach us 24/7 if support requirements change.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- PROCESS -->
+  <section id="process">
+    <div class="container">
+      <div class="section-head">
+        <h2>Getting started</h2>
+        <p>A simple, professional onboarding approach—clear communication from the first contact.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <h3>Enquiry</h3>
+          <p>Share your support needs and your location in South Australia.</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h3>Confirm details</h3>
+          <p>We discuss goals, preferred schedule, and the support you’re looking for.</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h3>Start support</h3>
+          <p>Services begin with a consistent approach and clear updates along the way.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENQUIRY FORM -->
+  <section id="enquiry">
+    <div class="container">
+      <div class="section-head">
+        <h2>Make an enquiry</h2>
+        <p>Please complete the form below and a member of our team will contact you.</p>
+      </div>
+
+      <div class="contact-bar" aria-label="Contact options">
+        <a class="contact-item" href="tel:+61406359394">
+          <span class="ci-ico" aria-hidden="true">📞</span>
+          <span>
+            <strong>Call</strong>
+            <span class="ci-sub">0406 359 394</span>
+          </span>
+        </a>
+        <a class="contact-item" href="mailto:hello.dsgroup@outlook.com">
+          <span class="ci-ico" aria-hidden="true">✉️</span>
+          <span>
+            <strong>Email</strong>
+            <span class="ci-sub">hello.dsgroup@outlook.com</span>
+          </span>
+        </a>
+      </div>
+
+      <div class="form-wrap">
+        <!--
+          FORMSPREE SETUP:
+          Replace the action URL below with your Formspree endpoint.
+          Example: https://formspree.io/f/abcdwxyz
+        -->
+        <form id="contactForm" action="https://formspree.io/f/mrelnjpa" method="POST">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+
+          
+
+          <div class="field full">
+            <label for="services">Support requested</label>
+            <input id="services" name="services" type="text" placeholder="e.g., daily living, transport, community access" required />
+          </div>
+
+          <div class="field full">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Please include suburb, preferred days/times, and any key details."></textarea>
+          </div>
+
+          <input type="hidden" name="_subject" value="New enquiry from website" />
+
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Submit enquiry</button>
+            <span class="hint">We aim to respond within 1–2 business days.</span>
+          </div>
+        </form>
+
+        <div id="errorMessage" class="error">Something went wrong. Please try again or email hello.dsgroup@outlook.com.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast popup (shows after submit) -->
+  <div id="toast" class="toast" role="status" aria-live="polite">
+    <div class="t-head">
+      <div class="t-title">Thank you</div>
+      <button class="t-close" type="button" aria-label="Close" onclick="hideToast()">Close</button>
+    </div>
+    <div class="t-msg">Your enquiry has been sent — we’ll be in contact soon.</div>
+  </div>
+
+  <!-- FOOTER (We Love NDIS + flags + acknowledgement, no "Acknowledgement of Country:" label) -->
+  <footer>
+    <div class="container" style="display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start;flex-wrap:wrap">
+      <div>
+        <p class="small" style="margin:0">
+          We acknowledge the Traditional Owners of Country throughout Australia and their continuing connection to land, sea and community.
+          We pay our respects to Elders past and present, and extend that respect to all Aboriginal and Torres Strait Islander peoples today.
+        </p>
+        <p class="small" style="margin:10px 0 0">Daily Support Group © <span id="yearRange"></span>. All rights reserved. <a class="footer-link" href="#" onclick="openPrivacy();return false;" aria-label="Open Privacy Policy in a new tab">Privacy Policy</a> · <a class="footer-link" href="#" onclick="openTerms();return false;" aria-label="Open Terms and Conditions in a new tab">Terms & Conditions</a></p>
+        <p class="small" style="margin:6px 0 0;display:flex;align-items:center;gap:6px;font-weight:700;color:var(--text)">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:999px;background:rgba(31,111,229,.10);color:var(--brand)">⏰</span>
+          Support available 24/7
+        </p>
+        
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+        <p class="small" style="margin:0;font-weight:700;color:var(--text)">Our approach</p>
+        <p class="small" style="margin:0">
+          We provide respectful, reliable in‑home support delivered with dignity, consistency, and professionalism.
+          Our focus is on building trust, maintaining privacy, and supporting independence in everyday life.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const startYear = 2026;
+    const currentYear = new Date().getFullYear();
+    document.getElementById("yearRange").textContent = startYear === currentYear ? startYear : `${startYear}–${currentYear}`;
+
+    // Privacy Policy (opens in a new tab)
+    function openPrivacy(){
+      const w = window.open('', '_blank', 'noopener,noreferrer');
+      if(!w) return;
+      const html = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Policy | Daily Support Group</title>
+<style>
+  :root{--bg:#ffffff;--surface:#ffffff;--surface2:#f6f9ff;--text:#0f172a;--muted:#475569;--muted2:#64748b;--brand:#1f6fe5;--stroke:rgba(15,23,42,.10);--shadow:0 10px 24px rgba(15,23,42,.10);--radius:18px;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  .wrap{max-width:860px;margin:0 auto;padding:32px 18px 44px}
+  .card{border:1px solid var(--stroke);border-radius:var(--radius);box-shadow:var(--shadow);background:var(--surface);padding:22px}
+  h1{margin:0 0 10px;font-size:clamp(28px,3.4vw,40px);letter-spacing:-.6px;line-height:1.12}
+  h2{margin:22px 0 10px;font-size:18px;letter-spacing:-.2px}
+  p{margin:0 0 12px;color:var(--muted)}
+  ul{margin:8px 0 12px;padding-left:18px;color:var(--muted)}
+  li{margin:6px 0}
+  .meta{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 0;color:var(--muted2);font-weight:700;font-size:13px}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--stroke);background:var(--surface2)}
+  a{color:var(--brand);text-decoration:none;font-weight:800}
+  a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+  .btn{border:1px solid var(--stroke);background:var(--surface2);padding:10px 12px;border-radius:14px;font-weight:800;cursor:pointer}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>Privacy Policy</h1>
+        <div class="meta">
+          <span class="pill">Daily Support Group</span>
+          <span class="pill">Effective: ${new Date().toLocaleDateString('en-AU')}</span>
+        </div>
+      </div>
+      <button class="btn" onclick="window.close()" type="button">Close</button>
+    </div>
+
+    <div class="card">
+      <p>Daily Support Group is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard personal information provided through our website and enquiries.</p>
+
+      <h2>Personal information we collect</h2>
+      <p>When you submit an enquiry, we may collect information such as your name, phone number, email address, suburb/location, and details about the support you are requesting.</p>
+
+      <h2>How we use your information</h2>
+      <ul>
+        <li>To respond to your enquiry and discuss your support needs</li>
+        <li>To arrange services, scheduling, and communication</li>
+        <li>To improve our service delivery and customer experience</li>
+        <li>For administrative and record-keeping purposes</li>
+      </ul>
+
+      <h2>Third-party processing (Formspree)</h2>
+      <p>Our website form is delivered using Formspree (a third-party form processing service). When you submit the form, the information is transmitted to Formspree to deliver your enquiry to our email address.</p>
+
+      <h2>Disclosure of information</h2>
+      <p>We do not sell personal information. We may disclose information only where required to respond to your enquiry, deliver services, comply with legal obligations, or where you have provided consent.</p>
+
+      <h2>Data security</h2>
+      <p>We take reasonable steps to protect personal information from misuse, interference, loss, unauthorised access, modification, or disclosure. No method of transmission or storage is completely secure, and we cannot guarantee absolute security.</p>
+
+      <h2>Access and correction</h2>
+      <p>You may request access to, or correction of, the personal information we hold about you. To make a request, contact us using the details below.</p>
+
+      <h2>Cookies and analytics</h2>
+      <p>This website does not intentionally collect sensitive information through cookies. If analytics or third-party services are added in the future, we will update this policy accordingly.</p>
+
+      <h2>Contact us</h2>
+      <p>If you have questions about this Privacy Policy or how your information is handled, please contact us:</p>
+      <ul>
+        <li>Email: <a href="mailto:hello.dsgroup@outlook.com">hello.dsgroup@outlook.com</a></li>
+        <li>Phone: <a href="tel:+61406359394">0406 359 394</a></li>
+      </ul>
+
+      <h2>Updates to this policy</h2>
+      <p>We may update this Privacy Policy from time to time. The latest version will be available via the Privacy Policy link on our website.</p>
+    </div>
+  </div>
+</body>
+</html>`;
+
+      w.document.open();
+      w.document.write(html);
+      w.document.close();
+    }
+    window.openPrivacy = openPrivacy;
+
+    // Terms & Conditions (opens in a new tab)
+    function openTerms(){
+      const w = window.open('', '_blank', 'noopener,noreferrer');
+      if(!w) return;
+      const html = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Terms & Conditions | Daily Support Group</title>
+<style>
+  :root{--bg:#ffffff;--surface:#ffffff;--surface2:#f6f9ff;--text:#0f172a;--muted:#475569;--muted2:#64748b;--brand:#1f6fe5;--stroke:rgba(15,23,42,.10);--shadow:0 10px 24px rgba(15,23,42,.10);--radius:18px;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  .wrap{max-width:860px;margin:0 auto;padding:32px 18px 44px}
+  .card{border:1px solid var(--stroke);border-radius:var(--radius);box-shadow:var(--shadow);background:var(--surface);padding:22px}
+  h1{margin:0 0 10px;font-size:clamp(28px,3.4vw,40px);letter-spacing:-.6px;line-height:1.12}
+  h2{margin:22px 0 10px;font-size:18px;letter-spacing:-.2px}
+  p{margin:0 0 12px;color:var(--muted)}
+  ul{margin:8px 0 12px;padding-left:18px;color:var(--muted)}
+  li{margin:6px 0}
+  .meta{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 0;color:var(--muted2);font-weight:700;font-size:13px}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--stroke);background:var(--surface2)}
+  a{color:var(--brand);text-decoration:none;font-weight:800}
+  a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+  .btn{border:1px solid var(--stroke);background:var(--surface2);padding:10px 12px;border-radius:14px;font-weight:800;cursor:pointer}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>Terms & Conditions</h1>
+        <div class="meta">
+          <span class="pill">Daily Support Group</span>
+          <span class="pill">Effective: ${new Date().toLocaleDateString('en-AU')}</span>
+        </div>
+      </div>
+      <button class="btn" onclick="window.close()" type="button">Close</button>
+    </div>
+
+    <div class="card">
+      <p>These Terms & Conditions govern the use of this website and enquiries submitted to Daily Support Group. By accessing this website or submitting an enquiry, you agree to these terms.</p>
+
+      <h2>Nature of services</h2>
+      <p>Daily Support Group provides in-home support services. Information on this website is general in nature and does not constitute medical, legal, or financial advice.</p>
+
+      <h2>Enquiries and service commencement</h2>
+      <p>Submitting an enquiry does not create a service agreement. Services commence only after mutual agreement on scope, availability, and relevant service arrangements.</p>
+
+      <h2>Accuracy of information</h2>
+      <p>We take reasonable care to ensure information on this website is accurate and current. However, content may change without notice.</p>
+
+      <h2>Availability</h2>
+      <p>Service availability may vary depending on location, staffing, and individual support requirements.</p>
+
+      <h2>Limitation of liability</h2>
+      <p>To the extent permitted by law, Daily Support Group is not liable for any loss arising from the use of this website or reliance on its content.</p>
+
+      <h2>Intellectual property</h2>
+      <p>All content on this website, including text, branding, and design, is the property of Daily Support Group unless otherwise stated.</p>
+
+      <h2>Governing law</h2>
+      <p>These Terms & Conditions are governed by the laws of South Australia and Australia.</p>
+
+      <h2>Contact</h2>
+      <p>If you have questions about these Terms & Conditions, please contact us at <a href="mailto:hello.dsgroup@outlook.com">hello.dsgroup@outlook.com</a>.</p>
+    </div>
+  </div>
+</body>
+</html>`;
+
+      w.document.open();
+      w.document.write(html);
+      w.document.close();
+    }
+    window.openTerms = openTerms;
+
+    // Toast controls
+    const toast = document.getElementById('toast');
+    function showToast(){
+      toast.classList.add('show');
+      window.clearTimeout(window.__toastTimer);
+      window.__toastTimer = window.setTimeout(hideToast, 7000);
+    }
+    function hideToast(){
+      toast.classList.remove('show');
+    }
+    window.hideToast = hideToast;
+
+    // Formspree-friendly submit (shows toast without leaving the page)
+    const form = document.getElementById('contactForm');
+    const error = document.getElementById('errorMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      error.style.display = 'none';
+      hideToast();
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+
+        if (res.ok) {
+          form.reset();
+          showToast();
+        } else {
+          error.style.display = 'block';
+        }
+      } catch (err) {
+        error.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
