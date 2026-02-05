@@ -46,8 +46,6 @@
       backdrop-filter:saturate(140%) blur(10px);
       border-bottom:1px solid var(--stroke);
     }
-
-    /* navbar height controlled here */
     .nav-inner{
       display:flex;
       align-items:center;
@@ -56,21 +54,16 @@
       gap:14px;
       min-height:84px;
     }
+    .nav-inner .btn{ padding:11px 14px; }
 
-    .nav-inner .btn{
-      padding:11px 14px;
-    }
-
-    /* LOGO */
+    /* LOGO (desktop) */
     .logo-only{
       display:flex;
       align-items:center;
       text-decoration:none;
       line-height:0;
-      min-width:0; /* allows logo to shrink nicely */
+      min-width:0;
     }
-
-    /* Crop wrapper (desktop) */
     .logo-crop{
       height:84px;
       overflow:hidden;
@@ -78,14 +71,12 @@
       align-items:center;
       min-width:0;
     }
-
-    /* Logo sizing + crop positioning (desktop) */
     .logo-crop img{
       height:196px;
       width:auto;
       display:block;
       border-radius:17px;
-      transform: translateY(-0px); /* desktop crop */
+      transform: translateY(0px);
     }
 
     .btn{
@@ -267,7 +258,6 @@
     .small{font-size:12.8px;color:var(--muted2)}
     .footer-link{color:var(--brand);text-decoration:none;font-weight:700}
     .footer-link:hover{text-decoration:underline}
-
     .footer-grid{
       display:grid;
       grid-template-columns:1.2fr .8fr;
@@ -284,60 +274,109 @@
       form{grid-template-columns:1fr}
     }
 
-    /* ✅ MOBILE FIX: bigger logo, same navbar height */
+    /* ✅ MOBILE — polished layout + bigger logo WITHOUT increasing navbar height */
     @media (max-width: 600px){
       .container{padding:0 16px}
 
-      /* fixed navbar height */
+      /* NAV */
       .nav-inner{
         min-height:64px;
-        padding:6px 0;
+        padding:8px 0;
         gap:12px;
       }
 
-      /* anchor keeps navbar height stable */
+      /* Keep the nav height stable */
       .logo-only{
         height:64px;
         display:flex;
         align-items:center;
         position:relative;
+        overflow:visible;
       }
 
-      /* wrapper stays nav height, but allows visual overflow */
+      /* Wrapper stays the same height */
       .logo-crop{
         height:64px;
-        overflow:visible;           /* KEY: allow logo to overflow without resizing navbar */
+        overflow:visible;       /* allow logo to overflow */
         position:relative;
       }
 
-      /* logo becomes visually bigger without affecting layout height */
+      /* Bigger logo visually (absolute), and remove sticker-looking corners */
       .logo-crop img{
-        height:92px;                /* make logo bigger visually */
-        width:auto;                 /* DO NOT change width logic */
-        max-width:none;             /* prevent unwanted shrinking */
-        position:absolute;          /* KEY: remove it from layout flow */
+        height:110px;           /* ✅ bigger (change 104–118 if needed) */
+        width:auto;
+        max-width:none;
+        position:absolute;
         left:0;
         top:50%;
-        transform: translateY(-50%);/* vertically centered */
-        border-radius:14px;
+        transform:translateY(-50%);
+        border-radius:0;        /* ✅ hides white-box corners */
+        background:transparent;
+        border:0;
+        box-shadow:none;
+        display:block;
       }
 
-      /* smaller contact button */
+      /* Contact button smaller and cleaner */
       .nav-inner .btn{
         padding:8px 12px;
         font-size:13px;
         border-radius:12px;
       }
 
-      /* add a bit of space so overflow logo doesn't touch hero */
+      /* HERO spacing so logo overflow doesn't touch content */
       .hero{padding:56px 0 22px}
-      h1{font-size:34px; line-height:1.08; letter-spacing:-.8px;}
-      .sub{font-size:16px}
 
-      .trust span{padding:9px 12px;font-size:13.5px}
-      .form-actions{flex-direction:column; align-items:stretch;}
+      /* Mobile typography */
+      h1{
+        font-size:34px;
+        line-height:1.08;
+        letter-spacing:-.8px;
+        margin:10px 0 12px;
+      }
+      .sub{
+        font-size:16px;
+        line-height:1.75;
+      }
+
+      /* Badges: nicer spacing and prevent awkward wrapping */
+      .badge-row{gap:8px;margin-bottom:14px}
+      .badge{
+        font-size:12.5px;
+        padding:7px 10px;
+      }
+
+      /* Trust pills: more compact */
+      .trust{gap:8px}
+      .trust span{
+        padding:8px 11px;
+        font-size:13px;
+      }
+
+      /* Cards/lists spacing on mobile */
+      section{padding:26px 0}
+      .card, .list-card, .step{box-shadow: 0 8px 18px rgba(15,23,42,.08);}
+      .card{padding:16px}
+      .list-card{padding:16px}
+
+      /* Contact bar: stack nicely */
+      .contact-bar{gap:10px}
+      .contact-item{
+        flex:1 1 100%;
+        padding:12px 12px;
+      }
+
+      /* Form: more comfortable on mobile */
+      .form-wrap{padding:16px}
+      input, textarea{padding:12px 12px;border-radius:14px}
+      textarea{min-height:130px}
+
+      /* Submit button full width */
+      .form-actions{flex-direction:column;align-items:stretch}
       .form-actions .btn{width:100%}
-      .hint{width:100%; text-align:center}
+      .hint{width:100%;text-align:center}
+
+      /* Footer stacks */
       .footer-grid{grid-template-columns:1fr}
     }
 
