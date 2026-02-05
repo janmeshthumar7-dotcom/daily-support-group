@@ -284,53 +284,60 @@
       form{grid-template-columns:1fr}
     }
 
-    /* Mobile fixes (NAV compact WITHOUT changing logo size/width) */
+    /* ✅ MOBILE FIX: bigger logo, same navbar height */
     @media (max-width: 600px){
       .container{padding:0 16px}
 
-      /* NAV BAR — compact */
+      /* fixed navbar height */
       .nav-inner{
-        min-height:56px;     /* compact navbar height */
-        padding:4px 0;
-        gap:10px;
-        align-items:center;
+        min-height:64px;
+        padding:6px 0;
+        gap:12px;
       }
 
-      /* LOGO WRAPPER — fixed height so navbar DOES NOT grow */
-      .logo-crop{
-        height:56px;         /* matches navbar */
-        overflow:hidden;     /* crop inside */
+      /* anchor keeps navbar height stable */
+      .logo-only{
+        height:64px;
         display:flex;
         align-items:center;
+        position:relative;
       }
 
-      /* LOGO IMAGE — unchanged size/width (as you requested) */
+      /* wrapper stays nav height, but allows visual overflow */
+      .logo-crop{
+        height:64px;
+        overflow:visible;           /* KEY: allow logo to overflow without resizing navbar */
+        position:relative;
+      }
+
+      /* logo becomes visually bigger without affecting layout height */
       .logo-crop img{
-        height:150px;        /* keep your logo size */
-        width:auto;
-        max-width:260px;     /* keep your logo width limit */
-        border-radius:12px;
-        transform: translateY(-46px); /* ✅ move logo up so centre shows nicely */
+        height:92px;                /* make logo bigger visually */
+        width:auto;                 /* DO NOT change width logic */
+        max-width:none;             /* prevent unwanted shrinking */
+        position:absolute;          /* KEY: remove it from layout flow */
+        left:0;
+        top:50%;
+        transform: translateY(-50%);/* vertically centered */
+        border-radius:14px;
       }
 
-      /* CONTACT BUTTON — smaller so header looks neat */
+      /* smaller contact button */
       .nav-inner .btn{
-        padding:6px 12px;
+        padding:8px 12px;
         font-size:13px;
         border-radius:12px;
       }
 
-      /* HERO */
-      .hero{padding:38px 0 18px}
+      /* add a bit of space so overflow logo doesn't touch hero */
+      .hero{padding:56px 0 22px}
       h1{font-size:34px; line-height:1.08; letter-spacing:-.8px;}
       .sub{font-size:16px}
 
       .trust span{padding:9px 12px;font-size:13.5px}
-
       .form-actions{flex-direction:column; align-items:stretch;}
       .form-actions .btn{width:100%}
       .hint{width:100%; text-align:center}
-
       .footer-grid{grid-template-columns:1fr}
     }
 
