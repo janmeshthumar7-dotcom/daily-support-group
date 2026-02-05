@@ -289,15 +289,21 @@
     @media (max-width: 600px){
       .container{padding:0 16px}
 
-      /* NAV + LOGO (fixes your logo looking “cut wrong” on phone) */
+      /* NAV + LOGO (ONLY mobile changes — desktop untouched) */
       .nav-inner{ min-height: 68px; padding:6px 0; }
+
+      /* Keep the bar neat and prevent oversized logo */
       .logo-crop{ height:68px; }
+
+      /* Adjust only the mobile logo rendering/crop */
       .logo-crop img{
-        height:140px;               /* slightly smaller so it fits cleaner */
-        max-width:220px;            /* prevents logo taking over the bar */
-        transform: translateY(-34px); /* adjust crop to show the logo center */
+        height:128px;               /* mobile logo size */
+        max-width:200px;            /* stops logo from taking over the nav */
+        width:auto;
+        transform: translateY(-22px); /* crop position so the logo is centred */
         border-radius:14px;
       }
+
       .nav-inner .btn{ padding:10px 12px; }
 
       /* HERO */
@@ -650,4 +656,3 @@
   </script>
 </body>
 </html>
-
