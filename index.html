@@ -1,4 +1,4 @@
-f<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -45,25 +45,36 @@ f<!DOCTYPE html>
       backdrop-filter:saturate(140%) blur(10px);
       border-bottom:1px solid var(--stroke);
     }
+
+    /* ✅ tighter navbar height */
     .nav-inner{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:14px 0;
+      padding:6px 0;     /* was 14px 0 — this is what made the box too tall */
       gap:14px;
     }
 
     /* LOGO ONLY */
-    .logo-only{display:flex;align-items:center;text-decoration:none;}
-    /* Bigger logo (desktop), smaller on mobile */
+    .logo-only{
+      display:flex;
+      align-items:center;
+      text-decoration:none;
+      line-height:0;     /* ✅ removes extra vertical whitespace */
+    }
+
+    /* ✅ keep logo big, but nav hugs it */
     .logo-only img{
-      height:196px;          /* was 64px */
+      height:196px;
       width:auto;
       display:block;
       border-radius:17px;
     }
+
+    /* mobile scaling so nav doesn’t become huge */
     @media (max-width: 600px){
-      .logo-only img{ height:145px; }
+      .logo-only img{ height:140px; }
+      .nav-inner{ padding:6px 0; }
     }
 
     .btn{
@@ -73,6 +84,7 @@ f<!DOCTYPE html>
       background: #ffffff;
       color:var(--text);
       cursor:pointer;
+      white-space:nowrap;
     }
     .btn:hover{ background: rgba(2,6,23,.03); }
     .btn-primary{
@@ -201,8 +213,8 @@ f<!DOCTYPE html>
     form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
     label{font-weight:700;font-size:13px;color:var(--muted)}
     .field{display:flex;flex-direction:column;gap:6px}
-    input, select, textarea{font:inherit;padding:12px 12px;border-radius:14px;border:1px solid var(--stroke);background:#fff;outline:none;}
-    input:focus, select:focus, textarea:focus{border-color: rgba(37,99,235,.45); box-shadow: 0 0 0 4px rgba(37,99,235,.10)}
+    input, textarea{font:inherit;padding:12px 12px;border-radius:14px;border:1px solid var(--stroke);background:#fff;outline:none;}
+    input:focus, textarea:focus{border-color: rgba(37,99,235,.45); box-shadow: 0 0 0 4px rgba(37,99,235,.10)}
     textarea{grid-column:1 / -1; min-height:120px; resize:vertical}
     .full{grid-column:1 / -1}
     .form-actions{grid-column:1 / -1; display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:4px}
@@ -264,12 +276,7 @@ f<!DOCTYPE html>
     <div class="container">
       <div class="nav-inner">
         <a class="logo-only" href="#top" aria-label="Home">
-          <!-- Fallbacks in case filename differs -->
-          <img
-            src="daily-support-group-logo.png"
-            alt="Daily Support Group Logo"
-            onerror="this.onerror=null; this.src='daily-support-group-logo.png';"
-          />
+          <img src="daily-support-group-logo.png" alt="Daily Support Group Logo" />
         </a>
         <a class="btn btn-primary" href="#enquiry">Contact</a>
       </div>
@@ -298,9 +305,9 @@ f<!DOCTYPE html>
             </div>
 
             <h1>Care at home, delivered with dignity and professionalism.</h1>
-            <p class="sub">We provide structured, professional in-home support designed to help individuals live safely, confidently, and independently in their own homes. Our services cover daily living assistance, transport support, and community participation, delivered with consistency, dignity, and respect across South Australia.</p>
+            <p class="sub">We provide structured, professional in-home support designed to help individuals live safely, confidently, and independently in their own homes. Our services cover daily living assistance, transport support and community participation, delivered with consistency, dignity and respect across South Australia.</p>
 
-            <p class="sub">Our approach is practical and person-focused. We take time to understand routines, preferences, and goals, and deliver support that fits naturally into everyday life while maintaining high standards of safety, privacy, and professional care.</p>
+            <p class="sub">Our approach is practical and person-focused. We take time to understand routines, preferences and goals, and deliver support that fits naturally into everyday life while maintaining high standards of safety, privacy and professional care.</p>
 
             <div class="trust" aria-label="trust points">
               <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2"/></svg>Experienced, trusted staff</span>
@@ -439,7 +446,7 @@ f<!DOCTYPE html>
       </div>
 
       <div class="contact-bar" aria-label="Contact options">
-        <a class="contact-item" href="tel:+61406359394">
+        <a class="contact-item" href="tel:+61481305304">
           <span class="ci-ico" aria-hidden="true">📞</span>
           <span>
             <strong>Call</strong>
@@ -537,13 +544,11 @@ f<!DOCTYPE html>
   </footer>
 
   <script>
-    // Dynamic footer year range
     const startYear = 2026;
     const currentYear = new Date().getFullYear();
     document.getElementById("yearRange").textContent =
       startYear === currentYear ? startYear : `${startYear}–${currentYear}`;
 
-    // Toast controls
     const toast = document.getElementById('toast');
     function showToast(){
       toast.classList.add('show');
@@ -555,7 +560,6 @@ f<!DOCTYPE html>
     }
     window.hideToast = hideToast;
 
-    // Formspree-friendly submit (shows toast without leaving the page)
     const form = document.getElementById('contactForm');
     const error = document.getElementById('errorMessage');
 
@@ -584,5 +588,3 @@ f<!DOCTYPE html>
   </script>
 </body>
 </html>
-
-
