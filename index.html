@@ -46,35 +46,46 @@
       border-bottom:1px solid var(--stroke);
     }
 
-    /* ✅ tighter navbar height */
+    /* ✅ navbar height controlled here */
     .nav-inner{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:6px 0;     /* was 14px 0 — this is what made the box too tall */
+      padding:8px 0;       /* keep tight */
       gap:14px;
+      min-height: 84px;    /* ensures clean bar height */
     }
 
-    /* LOGO ONLY */
+    /* LOGO */
     .logo-only{
       display:flex;
       align-items:center;
       text-decoration:none;
-      line-height:0;     /* ✅ removes extra vertical whitespace */
+      line-height:0;
     }
 
-    /* ✅ keep logo big, but nav hugs it */
-    .logo-only img{
-      height:196px;
+    /* ✅ Crop wrapper: THIS is what reduces the big empty box */
+    .logo-crop{
+      height:84px;         /* navbar visible height */
+      overflow:hidden;     /* hides the transparent top/bottom of the PNG */
+      display:flex;
+      align-items:center;
+    }
+
+    /* ✅ Keep logo big, but move it upward so the important part shows */
+    .logo-crop img{
+      height:196px;        /* keep your big logo size */
       width:auto;
       display:block;
       border-radius:17px;
+      transform: translateY(-58px); /* adjust if needed */
     }
 
-    /* mobile scaling so nav doesn’t become huge */
+    /* mobile */
     @media (max-width: 600px){
-      .logo-only img{ height:140px; }
-      .nav-inner{ padding:6px 0; }
+      .nav-inner{ min-height: 68px; padding:6px 0; }
+      .logo-crop{ height:68px; }
+      .logo-crop img{ height:145px; transform: translateY(-42px); }
     }
 
     .btn{
@@ -276,7 +287,9 @@
     <div class="container">
       <div class="nav-inner">
         <a class="logo-only" href="#top" aria-label="Home">
-          <img src="daily-support-group-logo.png" alt="Daily Support Group Logo" />
+          <span class="logo-crop">
+            <img src="daily-support-group-logo.png" alt="Daily Support Group Logo" />
+          </span>
         </a>
         <a class="btn btn-primary" href="#enquiry">Contact</a>
       </div>
@@ -502,7 +515,7 @@
     </div>
   </section>
 
-  <!-- Toast popup (shows after submit) -->
+  <!-- Toast popup -->
   <div id="toast" class="toast" role="status" aria-live="polite">
     <div class="t-head">
       <div class="t-title">Thank you</div>
