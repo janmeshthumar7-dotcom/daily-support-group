@@ -34,7 +34,7 @@
       background:var(--bg);
       color:var(--text);
       line-height:1.6;
-      overflow-x:hidden; /* prevents tiny horizontal scroll on mobile */
+      overflow-x:hidden;
     }
     a{color:inherit}
     .container{max-width:1120px;margin:0 auto;padding:0 20px}
@@ -44,6 +44,7 @@
       position:sticky;top:0;z-index:20;
       background: rgba(255,255,255,.92);
       backdrop-filter:saturate(140%) blur(10px);
+      -webkit-backdrop-filter:saturate(140%) blur(10px);
       border-bottom:1px solid var(--stroke);
     }
     .nav-inner{
@@ -70,6 +71,7 @@
       display:flex;
       align-items:center;
       min-width:0;
+      position:relative;
     }
     .logo-crop img{
       height:196px;
@@ -83,7 +85,7 @@
       display:inline-flex;align-items:center;justify-content:center;gap:10px;
       padding:11px 14px;border-radius:14px;text-decoration:none;
       font-weight:700;border:1px solid var(--stroke);
-      background: #ffffff;
+      background:#ffffff;
       color:var(--text);
       cursor:pointer;
       white-space:nowrap;
@@ -128,7 +130,13 @@
     .badge.secondary{background: rgba(34,197,94,.08);}
     .badge svg{width:16px;height:16px}
 
-    h1{margin:14px 0 14px;font-size:clamp(44px,5.6vw,64px);line-height:1.03;letter-spacing:-1.2px;font-weight:900;}
+    h1{
+      margin:14px 0 14px;
+      font-size:clamp(44px,5.6vw,64px);
+      line-height:1.03;
+      letter-spacing:-1.2px;
+      font-weight:900;
+    }
     .sub{
       margin:0 0 14px;
       color:var(--muted);
@@ -274,57 +282,73 @@
       form{grid-template-columns:1fr}
     }
 
-    /* ✅ MOBILE — polished layout + bigger logo WITHOUT increasing navbar height */
+    /* ✅ MOBILE (FINAL FIX)
+       - Removes "sticker / rectangle edge" by:
+         1) making nav background solid (no blur transparency)
+         2) cropping tiny outer pixels of the image via clip-path (does not change logo size)
+         3) keeping nav height stable
+    */
     @media (max-width: 600px){
       .container{padding:0 16px}
 
-      /* NAV */
+      /* 1) Solid nav background on mobile = no visible rectangle contrast */
+      .nav{
+        background:#ffffff;
+        backdrop-filter:none;
+        -webkit-backdrop-filter:none;
+      }
+
       .nav-inner{
         min-height:64px;
         padding:8px 0;
         gap:12px;
       }
 
-      /* Keep the nav height stable */
       .logo-only{
         height:64px;
         display:flex;
         align-items:center;
         position:relative;
-        overflow:visible;
+        overflow:hidden; /* keeps nav clean */
       }
 
-      /* Wrapper stays the same height */
+      /* Keep the layout width stable so logo aligns with bar */
       .logo-crop{
         height:64px;
-        overflow:visible;       /* allow logo to overflow */
+        width:260px;
+        max-width:60vw;
+        overflow:hidden;          /* important: prevents odd white "block" */
         position:relative;
       }
 
-      /* Bigger logo visually (absolute), and remove sticker-looking corners */
+      /* 2) DO NOT TOUCH logo size (height stays 110px like you had)
+            clip-path trims the outer 2% edge to hide any rectangle border in the image */
       .logo-crop img{
-        height:110px;           /* ✅ bigger (change 104–118 if needed) */
+        height:110px;
         width:auto;
         max-width:none;
         position:absolute;
         left:0;
         top:50%;
         transform:translateY(-50%);
-        border-radius:0;        /* ✅ hides white-box corners */
+        border-radius:0;
         background:transparent;
         border:0;
         box-shadow:none;
         display:block;
+
+        /* Removes the visible rectangle edge without resizing the logo */
+        clip-path: inset(2% 2% 2% 2%);
+        -webkit-clip-path: inset(2% 2% 2% 2%);
       }
 
-      /* Contact button smaller and cleaner */
       .nav-inner .btn{
         padding:8px 12px;
         font-size:13px;
         border-radius:12px;
       }
 
-      /* HERO spacing so logo overflow doesn't touch content */
+      /* Space so nothing feels cramped */
       .hero{padding:56px 0 22px}
 
       /* Mobile typography */
@@ -339,44 +363,27 @@
         line-height:1.75;
       }
 
-      /* Badges: nicer spacing and prevent awkward wrapping */
       .badge-row{gap:8px;margin-bottom:14px}
-      .badge{
-        font-size:12.5px;
-        padding:7px 10px;
-      }
+      .badge{font-size:12.5px;padding:7px 10px}
 
-      /* Trust pills: more compact */
       .trust{gap:8px}
-      .trust span{
-        padding:8px 11px;
-        font-size:13px;
-      }
+      .trust span{padding:8px 11px;font-size:13px}
 
-      /* Cards/lists spacing on mobile */
       section{padding:26px 0}
       .card, .list-card, .step{box-shadow: 0 8px 18px rgba(15,23,42,.08);}
       .card{padding:16px}
       .list-card{padding:16px}
 
-      /* Contact bar: stack nicely */
       .contact-bar{gap:10px}
-      .contact-item{
-        flex:1 1 100%;
-        padding:12px 12px;
-      }
+      .contact-item{flex:1 1 100%;padding:12px 12px}
 
-      /* Form: more comfortable on mobile */
       .form-wrap{padding:16px}
-      input, textarea{padding:12px 12px;border-radius:14px}
       textarea{min-height:130px}
 
-      /* Submit button full width */
       .form-actions{flex-direction:column;align-items:stretch}
       .form-actions .btn{width:100%}
       .hint{width:100%;text-align:center}
 
-      /* Footer stacks */
       .footer-grid{grid-template-columns:1fr}
     }
 
