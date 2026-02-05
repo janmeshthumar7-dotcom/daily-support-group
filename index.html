@@ -34,6 +34,7 @@
       background:var(--bg);
       color:var(--text);
       line-height:1.6;
+      overflow-x:hidden; /* prevents tiny horizontal scroll on mobile */
     }
     a{color:inherit}
     .container{max-width:1120px;margin:0 auto;padding:0 20px}
@@ -46,14 +47,18 @@
       border-bottom:1px solid var(--stroke);
     }
 
-    /* ✅ navbar height controlled here */
+    /* navbar height controlled here */
     .nav-inner{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:8px 0;       /* keep tight */
+      padding:8px 0;
       gap:14px;
-      min-height: 84px;    /* ensures clean bar height */
+      min-height:84px;
+    }
+
+    .nav-inner .btn{
+      padding:11px 14px;
     }
 
     /* LOGO */
@@ -62,30 +67,25 @@
       align-items:center;
       text-decoration:none;
       line-height:0;
+      min-width:0; /* allows logo to shrink nicely */
     }
 
-    /* ✅ Crop wrapper: THIS is what reduces the big empty box */
+    /* Crop wrapper */
     .logo-crop{
-      height:84px;         /* navbar visible height */
-      overflow:hidden;     /* hides the transparent top/bottom of the PNG */
+      height:84px;
+      overflow:hidden;
       display:flex;
       align-items:center;
+      min-width:0;
     }
 
-    /* ✅ Keep logo big, but move it upward so the important part shows */
+    /* Logo sizing + crop positioning */
     .logo-crop img{
-      height:196px;        /* keep your big logo size */
+      height:196px;
       width:auto;
       display:block;
       border-radius:17px;
-      transform: translateY(-0px); /* adjust if needed */
-    }
-
-    /* mobile */
-    @media (max-width: 600px){
-      .nav-inner{ min-height: 68px; padding:6px 0; }
-      .logo-crop{ height:68px; }
-      .logo-crop img{ height:145px; transform: translateY(-42px); }
+      transform: translateY(-6px); /* desktop crop */
     }
 
     .btn{
@@ -215,16 +215,24 @@
       border-radius:16px;
       background:var(--surface2);
       text-decoration:none;
+      min-width:0;
     }
     .contact-item:hover{background:linear-gradient(135deg,var(--brand-soft),var(--accent-soft))}
     .ci-ico{width:38px;height:38px;border-radius:14px;display:grid;place-items:center;background:#fff;border:1px solid var(--stroke)}
-    .ci-sub{display:block;color:var(--muted2);font-size:13px;font-weight:600;margin-top:2px}
+    .ci-sub{
+      display:block;
+      color:var(--muted2);
+      font-size:13px;
+      font-weight:600;
+      margin-top:2px;
+      word-break:break-word; /* prevents email overflow on small screens */
+    }
 
     .form-wrap{border:1px solid var(--stroke);background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;}
     form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
     label{font-weight:700;font-size:13px;color:var(--muted)}
     .field{display:flex;flex-direction:column;gap:6px}
-    input, textarea{font:inherit;padding:12px 12px;border-radius:14px;border:1px solid var(--stroke);background:#fff;outline:none;}
+    input, textarea{font:inherit;padding:12px 12px;border-radius:14px;border:1px solid var(--stroke);background:#fff;outline:none;min-width:0;}
     input:focus, textarea:focus{border-color: rgba(37,99,235,.45); box-shadow: 0 0 0 4px rgba(37,99,235,.10)}
     textarea{grid-column:1 / -1; min-height:120px; resize:vertical}
     .full{grid-column:1 / -1}
@@ -260,6 +268,14 @@
     .footer-link{color:var(--brand);text-decoration:none;font-weight:700}
     .footer-link:hover{text-decoration:underline}
 
+    /* footer layout (so we can make it responsive properly) */
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:24px;
+      align-items:start;
+    }
+
     /* Responsive */
     @media (max-width: 900px){
       .hero-grid{grid-template-columns:1fr}
@@ -268,9 +284,42 @@
       .step{grid-column: span 12}
       form{grid-template-columns:1fr}
     }
+
+    /* Mobile fixes (logo + spacing + footer + buttons) */
+    @media (max-width: 600px){
+      .container{padding:0 16px}
+
+      /* NAV + LOGO (fixes your logo looking “cut wrong” on phone) */
+      .nav-inner{ min-height: 68px; padding:6px 0; }
+      .logo-crop{ height:68px; }
+      .logo-crop img{
+        height:140px;               /* slightly smaller so it fits cleaner */
+        max-width:220px;            /* prevents logo taking over the bar */
+        transform: translateY(-34px); /* adjust crop to show the logo center */
+        border-radius:14px;
+      }
+      .nav-inner .btn{ padding:10px 12px; }
+
+      /* HERO */
+      .hero{padding:46px 0 22px}
+      h1{font-size:34px; line-height:1.08; letter-spacing:-.8px;}
+      .sub{font-size:16px}
+
+      /* Trust pills look nicer stacked */
+      .trust span{padding:9px 12px;font-size:13.5px}
+
+      /* Make enquiry button full width (but keep nav button normal) */
+      .form-actions{flex-direction:column; align-items:stretch;}
+      .form-actions .btn{width:100%}
+      .hint{width:100%; text-align:center}
+
+      /* Footer stacks properly */
+      .footer-grid{grid-template-columns:1fr}
+    }
+
     @media (max-width: 560px){
       .card{grid-column: span 12}
-      .hero-card{padding:22px}
+      .hero-card{padding:0} /* prevent unwanted inner padding on small screens */
     }
   </style>
 </head>
@@ -526,7 +575,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="container" style="display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start;flex-wrap:wrap">
+    <div class="container footer-grid">
       <div>
         <p class="small" style="margin:0">
           We acknowledge the Traditional Owners of Country throughout Australia and their continuing connection to land, sea and community.
@@ -601,9 +650,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
