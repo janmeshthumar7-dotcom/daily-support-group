@@ -70,7 +70,7 @@
       min-width:0; /* allows logo to shrink nicely */
     }
 
-    /* Crop wrapper */
+    /* Crop wrapper (desktop) */
     .logo-crop{
       height:84px;
       overflow:hidden;
@@ -79,7 +79,7 @@
       min-width:0;
     }
 
-    /* Logo sizing + crop positioning */
+    /* Logo sizing + crop positioning (desktop) */
     .logo-crop img{
       height:196px;
       width:auto;
@@ -285,18 +285,19 @@
       form{grid-template-columns:1fr}
     }
 
-    /* Mobile fixes (logo + spacing + footer + buttons) */
+    /* Mobile fixes (PERFECT: keep logo size, reduce nav + button) */
     @media (max-width: 600px){
       .container{padding:0 16px}
 
-      /* NAV BAR — tighten height (mobile only) */
+      /* NAV BAR — compact height */
       .nav-inner{
-        min-height:56px;
-        padding:4px 0;
+        min-height:50px;
+        padding:2px 0;
+        gap:10px;
         align-items:center;
       }
 
-      /* MOBILE LOGO — remove crop and show cleanly */
+      /* MOBILE LOGO — show full logo (no cropping) */
       .logo-crop{
         height:auto;
         overflow:visible;
@@ -304,40 +305,42 @@
         align-items:center;
       }
 
+      /* IMPORTANT: do not "scale huge" on mobile */
       .logo-crop img{
-        height:140px;
+        height:52px;          /* ✅ good size on mobile */
         width:auto;
-        max-width:700px;
+        max-width:220px;      /* ✅ prevents logo pushing button off-screen */
         transform:none;
-        border-radius:03px;
+        border-radius:12px;
       }
 
-      /* Contact button balanced with logo */
+      /* CONTACT BUTTON — smaller */
       .nav-inner .btn{
-        padding:8px 14px;
-        font-size:14px;
+        padding:6px 12px;
+        font-size:13px;
+        border-radius:12px;
       }
 
       /* HERO */
-      .hero{padding:40px 0 20px}
+      .hero{padding:38px 0 18px}
       h1{font-size:34px; line-height:1.08; letter-spacing:-.8px;}
       .sub{font-size:16px}
 
-      /* Trust pills look nicer stacked */
+      /* Trust pills */
       .trust span{padding:9px 12px;font-size:13.5px}
 
-      /* Make enquiry button full width (but keep nav button normal) */
+      /* Enquiry form button */
       .form-actions{flex-direction:column; align-items:stretch;}
       .form-actions .btn{width:100%}
       .hint{width:100%; text-align:center}
 
-      /* Footer stacks properly */
+      /* Footer stacks */
       .footer-grid{grid-template-columns:1fr}
     }
 
     @media (max-width: 560px){
       .card{grid-column: span 12}
-      .hero-card{padding:0} /* prevent unwanted inner padding on small screens */
+      .hero-card{padding:0}
     }
   </style>
 </head>
@@ -478,6 +481,7 @@
             <li><strong>Reliable staff</strong> and dependable scheduling</li>
           </ul>
         </div>
+
         <div class="list-card">
           <h3>How we support you</h3>
           <p style="margin:0;color:var(--muted)">
@@ -667,10 +671,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
